@@ -1,0 +1,4 @@
+'use client';
+import {useEffect} from 'react';
+import Lenis from 'lenis';
+export default function SmoothScroll(){useEffect(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const lenis=new Lenis({duration:1.3,smoothWheel:true,wheelMultiplier:.85,touchMultiplier:1.15,anchors:true,prevent:(node)=>!!node.closest('[role="dialog"],.messages,.market-list,.chart-surface')});const stop=()=>lenis.stop();const resume=()=>lenis.start();addEventListener('velune:entrance-lock',stop);addEventListener('velune:entrance-start',stop);addEventListener('velune:entrance-end',resume);let raf=0;const tick=(time:number)=>{lenis.raf(time);raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick);return()=>{cancelAnimationFrame(raf);removeEventListener('velune:entrance-lock',stop);removeEventListener('velune:entrance-start',stop);removeEventListener('velune:entrance-end',resume);lenis.destroy()}},[]);return null}
